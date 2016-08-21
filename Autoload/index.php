@@ -45,7 +45,6 @@ $product3->setPrice(90);
 
 ?>
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
