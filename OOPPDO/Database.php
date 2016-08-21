@@ -19,9 +19,9 @@ class Database {
 	// Use try catch block to check for any Exception or Error in connection
 	public function __construct() {
 		try {
-			$connect = new PDO("mysql:host={$this->DBHOST};dbname={$this->DBNAME}", $this->DBUSER, $this->DBPASS);
+			$this->connect = new PDO("mysql:host={$this->DBHOST};dbname={$this->DBNAME}", $this->DBUSER, $this->DBPASS);
 			// set the error mode for PDO
-			$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			echo "Connection Successful!";
 		} catch(Exception $e) {
 			echo $e->getMessage();
@@ -32,7 +32,7 @@ class Database {
 	// Declare the getInstance method in order to avoid duplicate connections to database.
 	public static function getInstance() {
 		if(!self::$instance) {
-			return self::$instance = new self();
+			self::$instance = new self();
 		}
 
 		return self::$instance;
@@ -48,7 +48,11 @@ class Database {
 // Declare the Database object here.
 $db = Database::getInstance();
 // Access the Database connection method.
-$connection = $db->getConnection();
+$connect = $db->getConnection();
+
+// These script will insert a new table Person in the database.
+$insert = $connect->prepare("CREATE TABLE person (id int primary key auto_increment, name varchar(50), age int, gender varchar(50));");
+$insert->execute();
 
 
 ?>
