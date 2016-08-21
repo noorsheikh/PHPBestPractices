@@ -1,8 +1,8 @@
 <?php
-// Declare an object Class1
+// Declare an object Person
 class Person {
 
-	// Define the individual properties
+	// Define the individual properties.
 	public $name;
 	public $age;
 	public $gender;
